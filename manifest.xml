@@ -121,7 +121,11 @@
     <hal format="hidl">
         <name>com.qualcomm.qti.imscmservice</name>
         <transport>hwbinder</transport>
-        <fqname>@2.3::IImsCmService/qti.ims.connectionmanagerservice</fqname>
+        <version>3.0</version>
+        <interface>
+            <name>IImsCmService</name>
+            <instance>qti.ims.connectionmanagerservice</instance>
+        </interface>
     </hal>
     <hal format="hidl">
         <name>com.qualcomm.qti.uceservice</name>
@@ -152,7 +156,11 @@
     <hal format="hidl">
         <name>vendor.goodix.hardware.interfaces.biometrics.fingerprint</name>
         <transport>hwbinder</transport>
-        <fqname>@2.1::IGoodixFingerprintDaemon/default</fqname>
+        <version>2.2</version>
+        <interface>
+            <name>IGoodixFingerprintDaemon</name>
+            <instance>default</instance>
+        </interface>
     </hal>
     <hal format="hidl">
         <name>vendor.qti.data.factory</name>
