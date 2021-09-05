@@ -297,12 +297,6 @@
       "Node": "GPUMinFreq",
       "Duration": 0,
       "Value": "465000000"
-    },
-    {
-      "PowerHint": "EXPENSIVE_RENDERING",
-      "Node": "GPUMaxFreq",
-      "Duration": 0,
-      "Value": "647000000"
     }
   ]
 }
