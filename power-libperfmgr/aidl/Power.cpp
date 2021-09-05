@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 The Android Open Source Project
+ *Copyright (C) 2020 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,8 @@ constexpr char kPowerHalRenderingProp[] = "vendor.powerhal.rendering";
 Power::Power(std::shared_ptr<HintManager> hm)
     : mHintManager(hm),
       mInteractionHandler(nullptr),
-      mSustainedPerfModeOn(false) {
+      mSustainedPerfModeOn(false),
+      mBatterySaverOn(false) {
     mInteractionHandler = std::make_unique<InteractionHandler>(mHintManager);
     mInteractionHandler->Init();
 
@@ -76,6 +77,12 @@ Power::Power(std::shared_ptr<HintManager> hm)
     ALOGI("PowerHAL ready to process hints");
 }
 
+void endAllHints(std::shared_ptr<HintManager> mHintManager) {
+    for (std::string hint: mHintManager->GetHints()) {
+        mHintManager->EndHint(hint);
+    }
+}
+
 ndk::ScopedAStatus Power::setMode(Mode type, bool enabled) {
     LOG(DEBUG) << "Power setMode: " << toString(type) << " to: " << enabled;
     ATRACE_INT(toString(type).c_str(), enabled);
@@ -86,6 +93,13 @@ ndk::ScopedAStatus Power::setMode(Mode type, bool enabled) {
             [[fallthrough]];
             }
         case Mode::LOW_POWER:
+            if (enabled) {
+                endAllHints(mHintManager);
+                mHintManager->DoHint("LOW_POWER");
+            } else {
+                mHintManager->EndHint("LOW_POWER");
+            }
+            mBatterySaverOn = enabled;
             break;
         case Mode::SUSTAINED_PERFORMANCE:
             if (enabled) {
@@ -111,9 +125,7 @@ ndk::ScopedAStatus Power::setMode(Mode type, bool enabled) {
         case Mode::AUDIO_STREAMING_LOW_LATENCY:
             [[fallthrough]];
         default:
-            if (mBatterySaverOn || mSustainedPerfModeOn) {
-                break;
-            }
+            if (mBatterySaverOn) break;
             if (enabled) {
                 mHintManager->DoHint(toString(type));
             } else {
@@ -141,7 +153,7 @@ ndk::ScopedAStatus Power::setBoost(Boost type, int32_t durationMs) {
     ATRACE_INT(toString(type).c_str(), durationMs);
     switch (type) {
         case Boost::INTERACTION:
-            if (mSustainedPerfModeOn) {
+            if (mSustainedPerfModeOn || mBatterySaverOn) {
                 break;
             }
             mInteractionHandler->Acquire(durationMs);
@@ -153,7 +165,7 @@ ndk::ScopedAStatus Power::setBoost(Boost type, int32_t durationMs) {
         case Boost::AUDIO_LAUNCH:
             [[fallthrough]];
         default:
-            if (mSustainedPerfModeOn) {
+            if (mSustainedPerfModeOn || mBatterySaverOn) {
                 break;
             }
             if (durationMs > 0) {
@@ -175,7 +187,6 @@ ndk::ScopedAStatus Power::isBoostSupported(Boost type, bool *_aidl_return) {
     *_aidl_return = supported;
     return ndk::ScopedAStatus::ok();
 }
-
 }  // namespace pixel
 }  // namespace impl
 }  // namespace power
