@@ -19,11 +19,10 @@
     <string name="display_title">Display</string>
     <string name="device_kcal_title">Displaykalibierung</string>
     <string name="vibration_strength_title">Stärke</string>
-
-    <!-- Haptic -->
-    <string name="vibration_title">Haptisches Feedback</string>
-
-<!-- Dirac settings -->
+  
+    <!-- Haptic --> <string 
+     name="vibration_title">Haptisches Feedback</string>
+    <!-- Dirac settings -->
     <string name="dirac_title">Mi Klangverbesserung</string>
     <string name="dirac_summary">Audioqualität optimieren</string>
     <string name="dirac_headset_title">Kopfhörertyp auswählen</string>
