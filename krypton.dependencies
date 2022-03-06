@@ -1,0 +1,12 @@
+[
+    {
+        "repository": "vendor_xiaomi_lavender",
+        "target_path": "vendor/xiaomi/lavender",
+        "branch": "A12"
+    },
+    {
+        "repository": "kernel_xiaomi_lavender",
+        "target_path": "kernel/xiaomi/lavender",
+        "branch": "A12"
+    }
+]
