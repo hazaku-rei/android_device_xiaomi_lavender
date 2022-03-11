@@ -81,11 +81,7 @@ public class BootReceiver extends BroadcastReceiver implements Utils {
         // Dirac
         context.startService(new Intent(context, DiracService.class));
 
-        // FPS Info
-        boolean enabled = Settings.Secure.getInt(context.getContentResolver(), 
-                DeviceSettings.PREF_KEY_FPS_INFO, 0) == 1;
-        if (enabled) {
-            context.startService(new Intent(context, FPSInfoService.class));
         }
-    }
+
 }
+
