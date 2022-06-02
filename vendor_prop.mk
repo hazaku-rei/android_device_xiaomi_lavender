@@ -88,6 +88,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.bluetooth.modem_nv_support=true \
     vendor.qcom.bluetooth.soc=cherokee \
     ro.vendor.bluetooth.wipower=false \
     persist.vendor.service.bdroid.sibs=false
@@ -110,7 +111,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.camera.expose.aux=1 \
     persist.vendor.camera.awb.sync=2 \
     persist.sys.camera.camera2=true \
-    vendor.video.disable.ubwc=1   
+    vendor.video.disable.ubwc=1
 
 # Charger
 PRODUCT_PRODUCT_PROPERTIES += \
