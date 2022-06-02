@@ -16,14 +16,6 @@
      limitations under the License.
 -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
-
-    <ImageView
-        android:id="@+id/preview"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:src="@drawable/preview" />
-
-</FrameLayout>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <style name="TextAppearance.Medium" parent="@android:style/TextAppearance.Material.Medium" />
+</resources>
