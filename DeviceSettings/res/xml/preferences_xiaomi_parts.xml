@@ -164,7 +164,7 @@
         </Preference>
       </PreferenceCategory>
 
-</PreferenceScreen>
+      <PreferenceCategory
         android:key="thermal_category"
         android:title="@string/thermal_root">
 
@@ -176,8 +176,8 @@
                 android:action="android.intent.action.MAIN"
                 android:targetClass="org.lineageos.settings.device.thermal.ThermalActivity"
                 android:targetPackage="org.lineageos.settings.device" />
-        </Preference>
+       </Preference>
 
-    </PreferenceCategory>
+     </PreferenceCategory>
 
 </PreferenceScreen>
